@@ -1,0 +1,80 @@
+﻿<Controls:MetroWindow x:Class="HealthcareManagementSystem.Views.EditUser"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:converters="clr-namespace:HealthcareManagementSystem.Converters"
+                      Title="Healthcare Management System"
+                      Height="600"
+                      Width="800"
+                      ResizeMode="CanResizeWithGrip"
+                      GlowBrush="{DynamicResource AccentColorBrush}">
+
+    <Window.Resources>
+        <converters:RoleVisibilityConverter x:Key="RoleVisibilityConverter" />
+        <converters:DoctorVisibilityConverter x:Key="DoctorVisibilityConverter" />
+        <converters:SecretaryVisibilityConverter x:Key="SecretaryVisibilityConverter" />
+        <converters:PatientVisibilityConverter x:Key="PatientVisibilityConverter" />
+    </Window.Resources>
+
+    <!-- your content -->
+    <Grid Height="570" Name="EditUserGrid" Width="790">
+        <Button Content="Edit" Height="23" HorizontalAlignment="Left" Margin="584,479,0,0" Name="EditButton"
+                VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}" />
+        <Label Content="Firstname" Height="28" HorizontalAlignment="Left" Margin="59,107,0,0" Name="FirstnameLabel"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="189,111,0,0" Name="FirstnameBox"
+                 VerticalAlignment="Top" Width="120" Text="{Binding Firstname, Mode=TwoWay}" />
+        <Label Content="Lastname" Height="28" HorizontalAlignment="Left" Margin="59,173,0,0" Name="LastnameLabel"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="189,177,0,0" Name="LastnameBox" VerticalAlignment="Top"
+                 Width="120" Text="{Binding Lastname, Mode=TwoWay}" />
+        <Label Content="Date of Birth" Height="28" HorizontalAlignment="Left" Margin="364,173,0,0" Name="DoBLabel"
+               VerticalAlignment="Top" Width="95" />
+        <DatePicker Height="25" HorizontalAlignment="Left" Margin="494,173,0,0" Name="DateOfBirthPicker"
+                    VerticalAlignment="Top" Width="120" Text="{Binding SelectedDate, Mode=TwoWay}" />
+        <Label Content="Phone Number" Height="28" HorizontalAlignment="Left" Margin="59,239,0,0"
+               Name="PhoneNumberLabel" VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,243,481,0" Name="PhoneNumberTextBox"
+                 Text="{Binding PhoneNumber, Mode=TwoWay}" VerticalAlignment="Top" Width="120" />
+        <Label Content="City" Height="28" HorizontalAlignment="Left" Margin="364,238,0,0" Name="CityLabel"
+               VerticalAlignment="Top" Width="95" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="494,239,0,0" Name="CityComboBox"
+                  VerticalAlignment="Top" Width="120" SelectedItem="{Binding City}" SelectedValuePath="Content"
+                  ItemsSource="{Binding Cities}" />
+        <Label Content="Role" Height="28" HorizontalAlignment="Left" Margin="59,304,0,0" Name="RoleLabel"
+               VerticalAlignment="Top" Width="95" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="189,306,0,0" Name="RoleComboBox"
+                  VerticalAlignment="Top" Width="120" SelectedValue="{Binding Role}" SelectedValuePath="Content"
+                  IsEnabled="False">
+            <ComboBoxItem IsSelected="True">Patient</ComboBoxItem>
+            <ComboBoxItem>Doctor</ComboBoxItem>
+            <ComboBoxItem>Secretary</ComboBoxItem>
+            <ComboBoxItem Visibility="Hidden">Admin</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Back" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="button1"
+                VerticalAlignment="Top" Width="75" Command="{Binding ToUsersManagementTabCommand}" />
+        <Label Content="CIN" Height="28" HorizontalAlignment="Left" Margin="364,107,0,0" Name="Label1"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,107,176,0" Name="CINTextBox" VerticalAlignment="Top"
+                 Width="120" Text="{Binding CIN}" />
+        <Label Content="Profession" Height="28" HorizontalAlignment="Left" Margin="364,307,0,0" Name="Label3"
+               VerticalAlignment="Top"
+               Visibility="{Binding Path=Role, Converter={StaticResource PatientVisibilityConverter}}" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,306,176,0" Name="TextBox2"
+                 Text="{Binding Profession, Mode=TwoWay}" VerticalAlignment="Top"
+                 Visibility="{Binding Path=Role, Converter={StaticResource PatientVisibilityConverter}}" Width="120" />
+        <Label Content="Years of Experience" Height="28" HorizontalAlignment="Left" Margin="364,307,0,0" Name="Label4"
+               VerticalAlignment="Top"
+               Visibility="{Binding Path=Role, Converter={StaticResource SecretaryVisibilityConverter}}" Width="116" />
+        <Controls:NumericUpDown HorizontalAlignment="Right" Margin="0,307,176,237" Maximum="30" Minimum="0"
+                                Value="{Binding YearsOfExp}"
+                                Visibility="{Binding Path=Role, Converter={StaticResource SecretaryVisibilityConverter}}"
+                                Width="120" />
+        <Label Content="Speciality" Height="28" Margin="364,307,0,0" Name="Label6" VerticalAlignment="Top"
+               Visibility="{Binding Path=Role, Converter={StaticResource DoctorVisibilityConverter}}"
+               HorizontalAlignment="Left" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,307,176,0" Name="TextBox6"
+                 Text="{Binding Speciality, Mode=TwoWay}" VerticalAlignment="Top"
+                 Visibility="{Binding Path=Role, Converter={StaticResource DoctorVisibilityConverter}}" Width="120" />
+    </Grid>
+</Controls:MetroWindow>

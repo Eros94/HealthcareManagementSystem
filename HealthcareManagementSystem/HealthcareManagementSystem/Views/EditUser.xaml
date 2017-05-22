@@ -1,0 +1,86 @@
+﻿<Controls:MetroWindow x:Class="HealthcareManagementSystem.Views.EditUser"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:utilities="clr-namespace:HealthcareManagementSystem.Utilities"
+                      Title="Healthcare Management System"
+                      Height="600"
+                      Width="800"
+                      ResizeMode="CanResizeWithGrip"
+                      GlowBrush="{DynamicResource AccentColorBrush}">
+
+
+    <!-- your content -->
+    <Grid Height="570" Name="EditUserGrid" Width="790">
+        <Button Content="Edit" Height="23" HorizontalAlignment="Left" Margin="584,479,0,0" Name="EditButton"
+                VerticalAlignment="Top" Width="75" Command="{Binding EditCommand}" />
+        <Label Content="Firstname" Height="28" HorizontalAlignment="Left" Margin="59,107,0,0" Name="FirstnameLabel"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="160,108,0,0" Name="FirstnameBox"
+                 VerticalAlignment="Top" Width="120" Text="{Binding Firstname, Mode=TwoWay}" />
+        <Label Content="Lastname" Height="28" HorizontalAlignment="Left" Margin="59,173,0,0" Name="LastnameLabel"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="160,174,0,0" Name="LastnameBox" VerticalAlignment="Top"
+                 Width="120" Text="{Binding Lastname, Mode=TwoWay}" />
+        <Label Content="Super User" Height="30" Margin="377,367,318,0" Name="SuperUserlabel" VerticalAlignment="Top" />
+        <Label Content="Date of Birth" Height="28" HorizontalAlignment="Left" Margin="377,239,0,0" Name="DoBLabel"
+               VerticalAlignment="Top" Width="95" />
+        <DatePicker Height="25" HorizontalAlignment="Left" Margin="478,239,0,0" Name="DateOfBirthPicker"
+                    VerticalAlignment="Top" Width="120" Text="{Binding SelectedDate, Mode=TwoWay}" />
+        <CheckBox Height="25" HorizontalAlignment="Left" Margin="478,367,0,0" Name="SuperUserCheckBox"
+                  VerticalAlignment="Top" Width="19" IsChecked="{Binding SuperUser}" />
+        <Label Content="Phone Number" Height="28" HorizontalAlignment="Left" Margin="59,239,0,0"
+               Name="PhoneNumberLabel" VerticalAlignment="Top" Width="95" />
+        <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="377,173,0,0" Name="PasswordLabel"
+               VerticalAlignment="Top" Width="95" />
+        <PasswordBox Height="23" HorizontalAlignment="Right" Margin="0,173,192,0" Name="PasswordBox"
+                     VerticalAlignment="Top" Width="120" utilities:PasswordBoxAssistant.BindPassword="true"
+                     utilities:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,240,510,0" Name="PhoneNumberTextBox"
+                 Text="{Binding PhoneNumber, Mode=TwoWay}" VerticalAlignment="Top" Width="120" />
+        <Label Content="City" Height="28" HorizontalAlignment="Left" Margin="377,304,0,0" Name="CityLabel"
+               VerticalAlignment="Top" Width="95" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="478,305,0,0" Name="CityComboBox"
+                  VerticalAlignment="Top" Width="120" SelectedValue="{Binding City}" SelectedValuePath="Content">
+            <ComboBoxItem IsSelected="True">Ariana</ComboBoxItem>
+            <ComboBoxItem>Beja</ComboBoxItem>
+            <ComboBoxItem>Ben Arous</ComboBoxItem>
+            <ComboBoxItem>Bizerte</ComboBoxItem>
+            <ComboBoxItem>Gabes</ComboBoxItem>
+            <ComboBoxItem>Gafsa</ComboBoxItem>
+            <ComboBoxItem>Jendouba</ComboBoxItem>
+            <ComboBoxItem>Kairouan</ComboBoxItem>
+            <ComboBoxItem>Kasserine</ComboBoxItem>
+            <ComboBoxItem>Kebili</ComboBoxItem>
+            <ComboBoxItem>Manouba</ComboBoxItem>
+            <ComboBoxItem>Kef</ComboBoxItem>
+            <ComboBoxItem>Mahdia</ComboBoxItem>
+            <ComboBoxItem>Medenine</ComboBoxItem>
+            <ComboBoxItem>Monastir</ComboBoxItem>
+            <ComboBoxItem>Nabeul</ComboBoxItem>
+            <ComboBoxItem>Sfax</ComboBoxItem>
+            <ComboBoxItem>Sidi Bouzid</ComboBoxItem>
+            <ComboBoxItem>Siliana</ComboBoxItem>
+            <ComboBoxItem>Sousse</ComboBoxItem>
+            <ComboBoxItem>Tataouine</ComboBoxItem>
+            <ComboBoxItem>Tozeur</ComboBoxItem>
+            <ComboBoxItem>Tunis</ComboBoxItem>
+            <ComboBoxItem>Zaghouan</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Role" Height="28" HorizontalAlignment="Left" Margin="59,304,0,0" Name="RoleLabel"
+               VerticalAlignment="Top" Width="95" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="160,303,0,0" Name="RoleComboBox"
+                  VerticalAlignment="Top" Width="120" SelectedValue="{Binding Role}" SelectedValuePath="Content">
+            <ComboBoxItem IsSelected="True">Patient</ComboBoxItem>
+            <ComboBoxItem>Doctor</ComboBoxItem>
+            <ComboBoxItem>Secretary</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Back" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="button1"
+                VerticalAlignment="Top" Width="75" Command="{Binding ToUsersManagementTabCommand}" />
+        <Label Content="CIN" Height="28" HorizontalAlignment="Left" Margin="377,108,0,0" Name="Label1"
+               VerticalAlignment="Top" Width="95" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,108,192,0" Name="CINTextBox" VerticalAlignment="Top"
+                 Width="120" Text="{Binding CIN}" />
+
+    </Grid>
+</Controls:MetroWindow>

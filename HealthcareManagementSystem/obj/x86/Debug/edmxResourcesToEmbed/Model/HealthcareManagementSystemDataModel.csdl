@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HealthcareManagementSystemDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="HealthcareManagementSystemDataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="HealthcareManagementSystemDataModel.User" />
+    <EntitySet Name="Appointments" EntityType="HealthcareManagementSystemDataModel.Appointment" />
+    <EntitySet Name="Cities1" EntityType="HealthcareManagementSystemDataModel.City" />
+    <AssociationSet Name="PatientAppointment" Association="HealthcareManagementSystemDataModel.PatientAppointment">
+      <End Role="Patient" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="UserCities" Association="HealthcareManagementSystemDataModel.UserCities">
+      <End Role="User" EntitySet="Users" />
+      <End Role="City" EntitySet="Cities1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Type="Int32" Name="IdUser" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Fisrtname" Nullable="false" />
+    <Property Type="String" Name="Lastname" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="Boolean" Name="IsSuperUser" Nullable="false" DefaultValue="False" />
+    <Property Type="String" Name="PhoneNumber" Nullable="false" />
+    <Property Type="String" Name="Role" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="HealthcareManagementSystemDataModel.UserCities" FromRole="User" ToRole="City" />
+  </EntityType>
+  <EntityType Name="SuperUser" BaseType="HealthcareManagementSystemDataModel.User" />
+  <EntityType Name="Patient" BaseType="HealthcareManagementSystemDataModel.User">
+    <Property Type="String" Name="Profession" Nullable="true" />
+    <Property Type="String" Name="LastVisit" Nullable="false" />
+    <NavigationProperty Name="Appointments" Relationship="HealthcareManagementSystemDataModel.PatientAppointment" FromRole="Patient" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="IdAppointment" />
+    </Key>
+    <Property Type="Int32" Name="IdAppointment" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="DateAndTime" Nullable="false" />
+    <Property Type="String" Name="Cost" Nullable="false" />
+    <Property Type="String" Name="NatureOfAct" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="HealthcareManagementSystemDataModel.PatientAppointment" FromRole="Appointment" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Doctor" BaseType="HealthcareManagementSystemDataModel.User">
+    <Property Type="String" Name="Speciality" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Secretary" BaseType="HealthcareManagementSystemDataModel.User">
+    <Property Type="Int32" Name="ExperienceYears" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="IdCity" />
+    </Key>
+    <Property Type="Int32" Name="IdCity" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CityName" Nullable="false" />
+    <Property Type="String" Name="PostalCode" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="HealthcareManagementSystemDataModel.UserCities" FromRole="City" ToRole="User" />
+  </EntityType>
+  <Association Name="PatientAppointment">
+    <End Type="HealthcareManagementSystemDataModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="HealthcareManagementSystemDataModel.Appointment" Role="Appointment" Multiplicity="*" />
+  </Association>
+  <Association Name="UserCities">
+    <End Type="HealthcareManagementSystemDataModel.User" Role="User" Multiplicity="*" />
+    <End Type="HealthcareManagementSystemDataModel.City" Role="City" Multiplicity="1" />
+  </Association>
+</Schema>

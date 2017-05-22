@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Model1.User" />
+    <EntitySet Name="Appointments" EntityType="Model1.Appointment" />
+    <AssociationSet Name="PatientAppointment" Association="Model1.PatientAppointment">
+      <End Role="Patient" EntitySet="Users" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <EntitySet Name="Cities" EntityType="Model1.Cities" />
+    <AssociationSet Name="UserCities" Association="Model1.UserCities">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Fisrtname" Nullable="false" />
+    <Property Type="String" Name="Lastname" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="Boolean" Name="IsSuperUser" Nullable="false" DefaultValue="False" />
+    <Property Type="String" Name="PhoneNumber" Nullable="false" />
+    <Property Type="String" Name="Role" Nullable="true" DefaultValue="Null" />
+    <NavigationProperty Name="Cities" Relationship="Model1.UserCities" FromRole="User" ToRole="Cities" />
+  </EntityType>
+  <EntityType Name="SuperUser" BaseType="Model1.User">
+    <Property Type="Int32" Name="IdSuperUser" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Patient" BaseType="Model1.User">
+    <Property Type="Int32" Name="IdPatient" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Profession" Nullable="true" />
+    <Property Type="String" Name="LastVisit" Nullable="false" />
+    <NavigationProperty Name="Appointments" Relationship="Model1.PatientAppointment" FromRole="Patient" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="DateAndTime" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Model1.PatientAppointment" FromRole="Appointment" ToRole="Patient" />
+    <Property Type="String" Name="Cost" Nullable="false" />
+    <Property Type="String" Name="NatureOfAct" Nullable="false" />
+  </EntityType>
+  <Association Name="PatientAppointment">
+    <End Type="Model1.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="Model1.Appointment" Role="Appointment" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="ComplexType1">
+    <Property Type="String" Name="NatureOfAct" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Doctor" BaseType="Model1.User">
+    <Property Type="Int32" Name="IdDoctor" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Secretary" BaseType="Model1.User">
+    <Property Type="Int32" Name="IdSecretary" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CityName" Nullable="false" />
+    <Property Type="String" Name="PostalCode" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Model1.UserCities" FromRole="Cities" ToRole="User" />
+  </EntityType>
+  <Association Name="UserCities">
+    <End Type="Model1.User" Role="User" Multiplicity="*" />
+    <End Type="Model1.Cities" Role="Cities" Multiplicity="1" />
+  </Association>
+</Schema>

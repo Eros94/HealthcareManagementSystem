@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HealthcareManagementSystemDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="HealthcareManagementSystemDataModelStoreContainer">
+    <EntitySet Name="Users" EntityType="HealthcareManagementSystemDataModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appointments" EntityType="HealthcareManagementSystemDataModel.Store.Appointments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cities1" EntityType="HealthcareManagementSystemDataModel.Store.Cities1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Patient" EntityType="HealthcareManagementSystemDataModel.Store.Users_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_SuperUser" EntityType="HealthcareManagementSystemDataModel.Store.Users_SuperUser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Doctor" EntityType="HealthcareManagementSystemDataModel.Store.Users_Doctor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Secretary" EntityType="HealthcareManagementSystemDataModel.Store.Users_Secretary" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PatientAppointment" Association="HealthcareManagementSystemDataModel.Store.PatientAppointment">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="UserCities" Association="HealthcareManagementSystemDataModel.Store.UserCities">
+      <End Role="User" EntitySet="Users" />
+      <End Role="City" EntitySet="Cities1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_User" Association="HealthcareManagementSystemDataModel.Store.FK_Patient_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Patient" EntitySet="Users_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SuperUser_inherits_User" Association="HealthcareManagementSystemDataModel.Store.FK_SuperUser_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="SuperUser" EntitySet="Users_SuperUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_inherits_User" Association="HealthcareManagementSystemDataModel.Store.FK_Doctor_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Doctor" EntitySet="Users_Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Secretary_inherits_User" Association="HealthcareManagementSystemDataModel.Store.FK_Secretary_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Secretary" EntitySet="Users_Secretary" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fisrtname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="IsSuperUser" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City_IdCity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Appointments">
+    <Key>
+      <PropertyRef Name="IdAppointment" />
+    </Key>
+    <Property Name="IdAppointment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateAndTime" Type="datetime" Nullable="false" />
+    <Property Name="Cost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NatureOfAct" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Patient_IdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities1">
+    <Key>
+      <PropertyRef Name="IdCity" />
+    </Key>
+    <Property Name="IdCity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostalCode" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Patient">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="Profession" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastVisit" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_SuperUser">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Doctor">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="Speciality" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Secretary">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="ExperienceYears" Type="int" Nullable="false" />
+    <Property Name="IdUser" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PatientAppointment">
+    <End Role="Patient" Type="HealthcareManagementSystemDataModel.Store.Users_Patient" Multiplicity="1" />
+    <End Role="Appointment" Type="HealthcareManagementSystemDataModel.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Patient_IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCities">
+    <End Role="User" Type="HealthcareManagementSystemDataModel.Store.Users" Multiplicity="*" />
+    <End Role="City" Type="HealthcareManagementSystemDataModel.Store.Cities1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="IdCity" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="City_IdCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_User">
+    <End Role="User" Type="HealthcareManagementSystemDataModel.Store.Users" Multiplicity="1" />
+    <End Role="Patient" Type="HealthcareManagementSystemDataModel.Store.Users_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SuperUser_inherits_User">
+    <End Role="User" Type="HealthcareManagementSystemDataModel.Store.Users" Multiplicity="1" />
+    <End Role="SuperUser" Type="HealthcareManagementSystemDataModel.Store.Users_SuperUser" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="SuperUser">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_inherits_User">
+    <End Role="User" Type="HealthcareManagementSystemDataModel.Store.Users" Multiplicity="1" />
+    <End Role="Doctor" Type="HealthcareManagementSystemDataModel.Store.Users_Doctor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Secretary_inherits_User">
+    <End Role="User" Type="HealthcareManagementSystemDataModel.Store.Users" Multiplicity="1" />
+    <End Role="Secretary" Type="HealthcareManagementSystemDataModel.Store.Users_Secretary" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Secretary">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

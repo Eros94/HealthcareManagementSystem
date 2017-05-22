@@ -1,0 +1,25 @@
+﻿<controls:MetroWindow x:Class="HealthcareManagementSystem.Views.ShowPatientsList"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Title="Healthcare Management System"
+                      Height="600"
+                      Width="800"
+                      ResizeMode="CanResizeWithGrip"
+                      GlowBrush="{DynamicResource AccentColorBrush}">
+
+    <!-- your content -->
+    <Grid Height="570" Name="ShowPatientsListGrid" Width="790">
+        <DataGrid AutoGenerateColumns="False" Height="300" HorizontalAlignment="Left" Margin="0,94,0,0"
+                  Name="PatientsGrid" VerticalAlignment="Top" Width="790" Background="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Fisrtname}" Header="Firstname" />
+                <DataGridTextColumn Binding="{Binding Lastname}" Header="LastName" />
+                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                <DataGridTextColumn Binding="{Binding Role}" Header="Role" />
+                <DataGridTextColumn Binding="{Binding DateOfBirth}" Header="Date Of Birth" />
+                <DataGridTextColumn Binding="{Binding City.CityName}" Header="City" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</controls:MetroWindow>

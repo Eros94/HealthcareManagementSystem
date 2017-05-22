@@ -1,0 +1,91 @@
+﻿<Controls:MetroWindow x:Class="HealthcareManagementSystem.Views.UsersManagement"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Title="Healthcare Management System"
+                      Height="600"
+                      Width="800"
+                      ResizeMode="CanResizeWithGrip"
+                      GlowBrush="{DynamicResource AccentColorBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!-- your content -->
+    <Grid Height="570" Name="UsersManagementGrid" Width="790">
+        <DataGrid AutoGenerateColumns="False" Height="300" HorizontalAlignment="Left" Margin="0,94,0,0"
+                  Name="UsersGrid" VerticalAlignment="Top" Width="790" Background="White" ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Fisrtname}" Header="Firstname" />
+                <DataGridTextColumn Binding="{Binding Lastname}" Header="LastName" />
+                <DataGridTextColumn Binding="{Binding CIN}" Header="CIN" />
+                <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Phone Number" />
+                <DataGridTextColumn Binding="{Binding Role}" Header="Role" />
+                <DataGridTextColumn Binding="{Binding DateOfBirth}" Header="Date Of Birth" />
+                <DataGridTextColumn Binding="{Binding City.CityName}" Header="City" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Get Result" Height="23" HorizontalAlignment="Left" Margin="465,436,0,0" Name="Button1"
+                VerticalAlignment="Top" Width="75" Command="{Binding GetListUsersCommand}" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="26,30,0,0" Name="SearchPatientsBox"
+                 VerticalAlignment="Top" Width="174" Controls:TextBoxHelper.Watermark="Search"
+                 Text="{Binding SearchWord, Mode=TwoWay}" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="310,30,0,0" Name="FilterPatientsComboBox"
+                  VerticalAlignment="Top" Width="120" SelectedValue="{Binding FilterSearch}"
+                  SelectedValuePath="Content">
+            <ComboBoxItem IsSelected="True">Firstname</ComboBoxItem>
+            <ComboBoxItem>Lastname</ComboBoxItem>
+            <ComboBoxItem>Phone Number</ComboBoxItem>
+            <ComboBoxItem>Role</ComboBoxItem>
+            <ComboBoxItem>Date Of Birth</ComboBoxItem>
+            <ComboBoxItem>City</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Filter By" Height="26" HorizontalAlignment="Left" Margin="224,30,0,0" Name="Label1"
+               VerticalAlignment="Top" Width="83" />
+        <Button Height="50" Margin="0,20,200,500" Style="{DynamicResource MetroCircleButtonStyle}" Width="50"
+                HorizontalAlignment="Right" Command="{Binding ToAddAppointmentTabCommand}">
+            <Rectangle
+                Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
+                Height="29" Width="22">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_page_add}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}" Margin="0,20,150,500"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding ToAddTabCommand}">
+            <Rectangle Width="25" Height="25"
+                       Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_user_add}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button Height="50" Margin="0,20,100,500" Style="{DynamicResource MetroCircleButtonStyle}" Width="50"
+                HorizontalAlignment="Right" Command="{Binding RemoveCommand}">
+            <Rectangle
+                Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
+                Height="25" Width="25">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_user_minus}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button Height="50" Margin="0,20,50,500" Style="{DynamicResource MetroCircleButtonStyle}" Width="50"
+                HorizontalAlignment="Right" Command="{Binding ToEditTabCommand}">
+            <Rectangle
+                Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
+                Height="25" Width="25">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_edit}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+    </Grid>
+
+</Controls:MetroWindow>

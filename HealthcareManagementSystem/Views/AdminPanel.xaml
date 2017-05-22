@@ -1,0 +1,44 @@
+﻿<Controls:MetroWindow x:Class="HealthcareManagementSystem.Views.AdminPanel"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:timeline="clr-namespace:TimelineLibrary;assembly=TimelineLibrary"
+                      Title="Healthcare Management System"
+                      Height="600"
+                      Width="800"
+                      ResizeMode="CanResizeWithGrip"
+                      GlowBrush="{DynamicResource AccentColorBrush}">
+
+    <Grid>
+        <timeline:TimelineTray
+            x:Name="timeline"
+            Height="880"
+            Grid.Row="0"
+            CalendarType="gregorian"
+            HorizontalAlignment="Stretch"
+            MinDateTime="01/01/1830"
+            MaxDateTime="01/01/1930">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition
+                    Height="*" />
+
+                <RowDefinition
+                    Height="80" />
+
+            </Grid.RowDefinitions>
+
+            <timeline:TimelineBand IsMainBand="True"
+                                   ItemSourceType="hours" TimelineWindowSize="20"
+                                   MaxEventHeight="130" Margin="0,137,0,0" Height="306" VerticalAlignment="Top" />
+
+        </timeline:TimelineTray>
+        <Rectangle Height="22" HorizontalAlignment="Left" Name="rectangle1" VerticalAlignment="Top" Width="158">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="White" />
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+
+</Controls:MetroWindow>
