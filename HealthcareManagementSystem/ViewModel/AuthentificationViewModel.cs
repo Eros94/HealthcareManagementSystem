@@ -62,9 +62,9 @@ namespace HealthcareManagementSystem.ViewModel
                     var superUser = (SuperUser) dbUser;
                     if (superUser.HashedPassword == hashedPassword) // SUPERUSER WANTS TO ACCESS ADMIN PANEL
                     {
-                        var usersManagementWindow = new UsersManagement();
+                        var adminPanel = new AdminPanel();
                         var activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                        usersManagementWindow.Show();
+                        adminPanel.Show();
                         activeWindow.Close();
                     }
                 } // USER
@@ -82,10 +82,10 @@ namespace HealthcareManagementSystem.ViewModel
                     foreach (var pass in listSuperPasswords)
                         if (pass == hashedPassword) // SUPERUSER WANTS TO ACCESS USER PANEL
                         {
-                            var usersManagementWindow = new ShowUserDetails(dbUser);
+                            var showUserDetailsWindow = new ShowUserDetails(dbUser);
                             var activeWindow =
                                 Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                            usersManagementWindow.Show();
+                            showUserDetailsWindow.Show();
                             activeWindow.Close();
                             return;
                         }

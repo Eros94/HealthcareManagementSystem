@@ -55,9 +55,9 @@ namespace HealthcareManagementSystem.ViewModel
             RemoveCommand = new RelayCommand(Remove);
             ToAddAppointmentTabCommand = new RelayCommand(ToAddAppointmentTab);
             ToUsersManagementTabCommand = new RelayCommand(ToUsersManagementTab);
+            ToAdminPanelCommand = new RelayCommand(ToAdminPanel);
             Cities = CityDAO.GetCitiesQuery().ToObservableCollection();
         }
-
 
         public UsersManagementViewModel(User selectedUser)
         {
@@ -256,6 +256,8 @@ namespace HealthcareManagementSystem.ViewModel
 
         public ICommand ToUsersManagementTabCommand { get; set; }
 
+        public ICommand ToAdminPanelCommand { get; set; }
+
         public void LoadData(User selectedUser)
         {
             Id = selectedUser.IdUser;
@@ -285,6 +287,14 @@ namespace HealthcareManagementSystem.ViewModel
             }
         }
 
+        public void ToAdminPanel()
+        {
+            var adminPanel = new AdminPanel();
+            var activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            adminPanel.Show();
+            activeWindow.Close();
+        }
+
         public void ToAddTab()
         {
             var addUserWindow = new AddUser();
@@ -312,10 +322,17 @@ namespace HealthcareManagementSystem.ViewModel
         {
             if (SelectedUser != null)
             {
-                var addAppointmentWindow = new AddAppointment(SelectedUser.IdUser);
-                var activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                addAppointmentWindow.Show();
-                activeWindow.Close();
+                if (SelectedUser.Role == "Patient")
+                {
+                    var addAppointmentWindow = new AddAppointment(SelectedUser.IdUser);
+                    var activeWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                    addAppointmentWindow.Show();
+                    activeWindow.Close();
+                }
+                else
+                {
+                    MessageBox.Show("This is not a patient!");
+                }
             }
             else
             {

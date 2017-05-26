@@ -3,21 +3,29 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:timeline="clr-namespace:TimelineLibrary;assembly=TimelineLibrary"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
                       Title="Healthcare Management System"
                       Height="600"
                       Width="800"
                       ResizeMode="CanResizeWithGrip"
                       GlowBrush="{DynamicResource AccentColorBrush}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid>
-        <timeline:TimelineTray
-            x:Name="timeline"
+        <timeline:TimelineTray 
+            x:Name="Timeline"
             Height="880"
             Grid.Row="0"
             CalendarType="gregorian"
-            HorizontalAlignment="Stretch"
-            MinDateTime="01/01/1830"
-            MaxDateTime="01/01/1930">
+            MinDateTime="01/01/2000"
+            MaxDateTime="01/01/3000"
+            CurrentDateTime="{x:Static sys:DateTime.Now}">
 
             <Grid.RowDefinitions>
 
@@ -30,9 +38,17 @@
             </Grid.RowDefinitions>
 
             <timeline:TimelineBand IsMainBand="True"
-                                   ItemSourceType="hours" TimelineWindowSize="20"
-                                   MaxEventHeight="130" Margin="0,137,0,0" Height="306" VerticalAlignment="Top" />
-
+                                   ItemSourceType="hours"
+                                   Margin="0,149,0,0" Height="328" VerticalAlignment="Top" />
+            <Button Height="50" Margin="0,50,56,700" Style="{DynamicResource MetroCircleButtonStyle}" Width="50" HorizontalAlignment="Right" Command="{Binding ToUsersManagementTabCommand}">
+                <Rectangle Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Height="25" Width="25">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_group}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+            <Label Content="{Binding WelcomeMessage, Mode=OneWay}" Height="81" HorizontalAlignment="Left" Margin="18,62,0,0" Name="label1" VerticalAlignment="Top" Width="372" />
+            <Button Command="{Binding LogoutCommand}" Content="Logout" Height="23" HorizontalAlignment="Left" Margin="18,28,0,0" Name="Button1" VerticalAlignment="Top" Width="75" />
         </timeline:TimelineTray>
         <Rectangle Height="22" HorizontalAlignment="Left" Name="rectangle1" VerticalAlignment="Top" Width="158">
             <Rectangle.Fill>

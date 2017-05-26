@@ -1,5 +1,11 @@
-﻿using HealthcareManagementSystem.ViewModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
+using HealthcareManagementSystem.DAL;
+using HealthcareManagementSystem.ViewModel;
 using MahApps.Metro.Controls;
+using TimelineLibrary;
 
 namespace HealthcareManagementSystem.Views
 {
@@ -13,6 +19,8 @@ namespace HealthcareManagementSystem.Views
             InitializeComponent();
             var adminPanelViewModel = new AdminPanelViewModel();
             DataContext = adminPanelViewModel;
+            List<TimelineEvent> listOfTodaysAppointments = AppointmentDAO.GetTodaysAppointments();
+            Timeline.ResetEvents(listOfTodaysAppointments);
         }
     }
 }

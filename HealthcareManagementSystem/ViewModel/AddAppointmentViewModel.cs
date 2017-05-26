@@ -24,6 +24,7 @@ namespace HealthcareManagementSystem.ViewModel
         public AddAppointmentViewModel(int id)
         {
             AddAppointmentCommand = new RelayCommand(AddAppointment);
+            ToUsersManagementTabCommand = new RelayCommand(ToUsersManagementTab);
             DateOfAppointment = DateTime.Now;
             Id = id;
         }

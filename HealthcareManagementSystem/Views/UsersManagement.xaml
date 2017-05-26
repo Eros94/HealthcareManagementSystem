@@ -32,10 +32,10 @@
         </DataGrid>
         <Button Content="Get Result" Height="23" HorizontalAlignment="Left" Margin="465,436,0,0" Name="Button1"
                 VerticalAlignment="Top" Width="75" Command="{Binding GetListUsersCommand}" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="26,30,0,0" Name="SearchPatientsBox"
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="115,34,0,0" Name="SearchPatientsBox"
                  VerticalAlignment="Top" Width="174" Controls:TextBoxHelper.Watermark="Search"
                  Text="{Binding SearchWord, Mode=TwoWay}" />
-        <ComboBox Height="23" HorizontalAlignment="Left" Margin="310,30,0,0" Name="FilterPatientsComboBox"
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="399,34,0,0" Name="FilterPatientsComboBox"
                   VerticalAlignment="Top" Width="120" SelectedValue="{Binding FilterSearch}"
                   SelectedValuePath="Content">
             <ComboBoxItem IsSelected="True">Firstname</ComboBoxItem>
@@ -45,7 +45,7 @@
             <ComboBoxItem>Date Of Birth</ComboBoxItem>
             <ComboBoxItem>City</ComboBoxItem>
         </ComboBox>
-        <Label Content="Filter By" Height="26" HorizontalAlignment="Left" Margin="224,30,0,0" Name="Label1"
+        <Label Content="Filter By" Height="26" HorizontalAlignment="Left" Margin="313,34,0,0" Name="Label1"
                VerticalAlignment="Top" Width="83" />
         <Button Height="50" Margin="0,20,200,500" Style="{DynamicResource MetroCircleButtonStyle}" Width="50"
                 HorizontalAlignment="Right" Command="{Binding ToAddAppointmentTabCommand}">
@@ -53,7 +53,7 @@
                 Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
                 Height="29" Width="22">
                 <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_page_add}" />
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_clipboard_edit}" />
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
@@ -86,6 +86,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
+        <Button Command="{Binding ToAdminPanelCommand}" Content="Back" Height="23" HorizontalAlignment="Left" Margin="12,32,0,0" Name="button2" VerticalAlignment="Top" Width="75" />
     </Grid>
 
 </Controls:MetroWindow>
